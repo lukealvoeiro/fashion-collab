@@ -1,0 +1,27 @@
+{
+  "name": "fashion-collab",
+  "version": "1.0.0",
+  "description": "A website designed to help connect fashion designers, clothiers and like-minded individuals with an interest in style, fabrics and art.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukealvoeiro/fashion-collab.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lukealvoeiro/fashion-collab/issues"
+  },
+  "homepage": "https://github.com/lukealvoeiro/fashion-collab#readme",
+  "devDependencies": {
+    "acorn": "^6.0.0",
+    "eslint": "^6.2.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.6.9"
+  }
+}

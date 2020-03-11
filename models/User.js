@@ -10,7 +10,8 @@ const userSchema = new Schema({
   email: String,
   password: String,
   username: String,
-  friends: [String]
+  friends: [String],
+  credits: { type: Number, default: 0 }
   //can also specify other things through an object, check mongoose documentation
 });
 

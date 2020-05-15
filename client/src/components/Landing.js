@@ -4,13 +4,13 @@ import { Redirect } from "react-router-dom";
 
 class Landing extends Component {
   render() {
-    if (!this.props.user) {
-      return <Redirect to="/surveys" />;
+    if (this.props.auth.user) {
+      return <Redirect to="/" />;
     }
     return (
-      <div style={{ textAlign: "center" }}>
-        <h1>Emaily!</h1>Collect feedback from your users
-      </div>
+      <p className="mission-statement p20">
+        Defining the future of fashion through collaboration
+      </p>
     );
   }
 }

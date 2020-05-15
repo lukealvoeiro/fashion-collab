@@ -12,7 +12,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id).then(user => {
+  User.findById(id).then((user) => {
     done(null, user);
   });
 });
@@ -23,7 +23,7 @@ passport.use(
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
       callbackURL: "/auth/google/callback",
-      proxy: true
+      proxy: true,
     },
     // async retreival of user's credentials from mongodb, if not, create new user
     async (accessToken, refreshToken, profile, done) => {
@@ -35,7 +35,7 @@ passport.use(
         googleId: profile.id,
         firstName: profile._json.given_name,
         lastName: profile._json.family_name,
-        email: profile._json.email
+        email: profile._json.email,
       }).save();
       done(null, newUser);
     }
@@ -49,7 +49,7 @@ passport.use(
       clientSecret: keys.facebookAppSecret,
       callbackURL: "/auth/facebook/callback",
       enableProof: true,
-      profileFields: ["id", "emails", "name"]
+      profileFields: ["id", "emails", "name"],
     },
     async (accessToken, refreshToken, profile, done) => {
       console.log(profile);
@@ -61,41 +61,81 @@ passport.use(
         facebookId: profile._json.id,
         firstName: profile._json.first_name,
         lastName: profile._json.last_name,
-        email: profile._json.email
+        email: profile._json.email,
       }).save();
       done(null, newUser);
     }
   )
 );
 
-// passport.use(
-//   "local-signup",
-//   new LocalStrategy(
-//     {
-//       // by default, local strategy uses username and password, we will override with email
-//       usernameField: "email",
-//       passwordField: "password",
-//       passReqToCallback: true // allows us to pass back the entire request to the callback
-//     },
-//     async (req, email, password, done) => {
-//       var rows = await knex("Users").where({ email: email });
-//       if (rows.length) {
-//         return done(
-//           null,
-//           false,
-//           req.flash("signupMessage", "That email is already taken.")
-//         );
-//       } else {
-//         newUser = {
-//           email: _json.email,
-//           firstName: _json.first_name,
-//           lastName: _json.last_name,
-//           facebookId: _json.id
-//         };
-//         resInsert = await knex("Users").insert(newUser);
-//         newUser.idUser = resInsert[0];
-//         return done(null, newUser);
-//       }
-//     }
-//   )
-// );
+passport.use(
+  "local",
+  new LocalStrategy(
+    {
+      // by default, local strategy uses username and password, we will override with email
+      usernameField: "email",
+      passwordField: "password",
+      passReqToCallback: true, // allows us to pass back the entire request to the callback
+    },
+    async (req, email, password, done) => {
+      var rows = await User.findOne({ email: email });
+      if (rows) {
+        return done(null, false, "That email is already taken.");
+      } else {
+        const newUser = await new User({
+          firstName: req.body.first_name,
+          lastName: req.body.last_name,
+          email: email,
+          password: password,
+        }).save();
+        return done(null, newUser);
+      }
+    }
+  )
+);
+
+passport.use(
+  "local-login",
+  new LocalStrategy(
+    {
+      // by default, local strategy uses username and password, we will override with email
+      usernameField: "email",
+      passwordField: "password",
+    },
+    async (email, password, done) => {
+      try {
+        var user = await User.findOne({ email: email });
+        if (!user) {
+          return done(null, false, { message: "Incorrect username." });
+        }
+        user.comparePassword(password, (error, match) => {
+          if (!match) {
+            done(null, false, { message: "Incorrect password." });
+          } else {
+            return done(null, user);
+          }
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      // await User.findOne({ email: email }, function (err, user) {
+      //   if (err) {
+      //     return done(err);
+      //   }
+      //   if (!user) {
+      //     console.log("Incorrect username.");
+      //     return done(null, false, { message: "Incorrect username." });
+      //   }
+      //   if (
+      //     !user.comparePassword(password, (error, match) => {
+      //       if (!match) {
+      //         console.log("Incorrect password.");
+      //         done(null, false, { message: "Incorrect password." });
+      //       }
+      //     })
+      //   )
+      //     return done(null, user);
+      // });
+    }
+  )
+);

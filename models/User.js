@@ -1,18 +1,41 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const { Schema } = mongoose;
-// Schema describes what every individual record will look like
+SALT_WORK_FACTOR = 10;
 
-const userSchema = new Schema({
-  googleId: String,
-  facebookId: String,
-  firstName: String,
-  lastName: String,
-  email: String,
-  password: String,
-  username: String,
-  friends: [String],
-  credits: { type: Number, default: 0 }
-  //can also specify other things through an object, check mongoose documentation
+var UserSchema = new Schema({
+  googleId: { type: String },
+  facebookId: { type: String },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  email: { type: String, unique: true, required: true },
+  password: { type: String },
 });
 
-mongoose.model("users", userSchema);
+UserSchema.pre("save", function (next) {
+  var user = this;
+  // only hash the password if it has been modified (or is new)
+  if (!user.isModified("password")) return next();
+
+  // generate a salt
+  bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+    if (err) return next(err);
+
+    // hash the password using our new salt
+    bcrypt.hash(user.password, salt, function (err, hash) {
+      if (err) return next(err);
+      // override the cleartext password with the hashed one
+      user.password = hash;
+      next();
+    });
+  });
+});
+
+UserSchema.methods.comparePassword = function (candidatePassword, callback) {
+  bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+    if (err) return callback(err);
+    callback(null, isMatch);
+  });
+};
+
+module.exports = mongoose.model("users", UserSchema);

@@ -1,23 +1,24 @@
-import "materialize-css/dist/css/materialize.min.css";
+//import "materialize-css/dist/css/materialize.min.css";
+import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap/dist/css/bootstrap.css";
+import "./styles.scss";
+
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import reduxThunk from "redux-thunk";
 
-import App from "./components/App";
-import reducers from "./reducers";
+import { Provider } from "react-redux";
+import store from "./store";
+
+// import App from "./components/App";
+import App2 from "./components/App2";
 
 //development only, axios helpers
 import axios from "axios";
 window.axios = axios;
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
-
-//root is from /../public/index.html
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App2 />
   </Provider>,
   document.querySelector("#root")
 );

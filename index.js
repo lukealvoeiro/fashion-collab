@@ -8,7 +8,11 @@ require("./models/User");
 require("./models/Survey");
 require("./services/passport");
 
-mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
+mongoose.connect(keys.mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+mongoose.set("useCreateIndex", true);
 
 const app = express();
 
@@ -16,7 +20,7 @@ const app = express();
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [keys.cookieKey]
+    keys: [keys.cookieKey],
   })
 );
 app.use(bodyParser.json());

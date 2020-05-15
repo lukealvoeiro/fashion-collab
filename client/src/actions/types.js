@@ -1,2 +1,9 @@
 export const FETCH_USER = "fetch_user";
+export const USER_LOADED = "user_loaded";
+export const AUTH_ERROR = "auth_error";
+export const EMAIL_TAKEN = "email_taken";
+export const LOGOUT_USER = "logout_user";
 export const FETCH_SURVEYS = "fetch_surveys";
+export const ALTER_AUTH_MODAL = "alter_auth_modal";
+export const AUTH_LOGIN_FAIL = "auth_login_fail";
+export const AUTH_SIGNUP_FAIL = "auth_signup_fail";

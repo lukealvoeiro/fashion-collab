@@ -59,5 +59,5 @@ function validateEmptyFields(values, errors) {
 export default reduxForm({
   validate: validate,
   form: "surveyForm",
-  destroyOnUnmount: false
+  destroyOnUnmount: false,
 })(SurveyForm);

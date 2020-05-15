@@ -1,0 +1,466 @@
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins/_breakpoints";
+
+// colors
+$color-success: rgb(1, 165, 121);
+$background-success-hovered: rgb(9, 146, 110);
+$like-color: rgb(255, 83, 83);
+$like-bw: rgba(26, 26, 26, 0.616);
+$text-color-primary: rgba(0, 0, 0, 0.84);
+$text-color-secondary: rgb(100, 100, 100);
+$divider-border: 1px solid rgba(0, 0, 0, 0.2);
+
+$lr-spacing-notifications: 1rem;
+
+// font styles
+$seconary-font-family: "Tomorrow",
+sans-serif;
+$terciary-font-family: "Playfair Display",
+sans-serif;
+$card-text-size: 0.9rem;
+
+:root {
+  font-size: 16px;
+  font-family: "Lato", sans-serif;
+  background-color: white;
+  --green: red;
+
+  @include media-breakpoint-only(sm) {
+    font-size: 15px;
+  }
+
+  @include media-breakpoint-only(xs) {
+    font-size: 15px;
+  }
+}
+
+.green-background {
+  background: $color-success;
+}
+
+.btn-signup {
+  padding: 5px 35px;
+  font-size: 15px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  color: $text-color-primary;
+}
+
+.link-unstyled,
+.link-unstyled:link,
+.link-unstyled:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.logo-font {
+  font-family: $seconary-font-family;
+  font-weight: 600;
+  font-size: 2.2rem;
+}
+
+.header-links {
+  margin-right: 1.5rem;
+}
+
+.link-unstyled .header-links {
+  color: red;
+}
+
+.margin-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.align-middle {
+  justify-content: center;
+  align-items: center;
+}
+
+.mission-statement {
+  font-weight: 600;
+  font-size: 3.5rem;
+  font-family: $terciary-font-family;
+  padding: 30px 10px;
+  max-width: 1200px;
+  line-height: 125%;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include media-breakpoint-only(xs) {
+    font-size: 3rem;
+  }
+
+  @include media-breakpoint-only(lg) {
+    font-size: 4rem;
+  }
+
+  @include media-breakpoint-only(xl) {
+    font-size: 5rem;
+  }
+}
+
+.upgrade-button {
+  background-color: white;
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+.header-links:hover,
+.header-links:active {
+  color: $text-color-secondary;
+}
+
+.upgrade-button:hover,
+.upgrade-button:active {
+  border-color: black;
+}
+
+.card {
+  @include media-breakpoint-only(xs) {
+    border: none;
+    border-radius: 0;
+  }
+}
+
+.card-padding {
+  padding: 0.3rem 0.4rem;
+  padding-right: 0px;
+  font-size: $card-text-size;
+  display: flex;
+
+  @include media-breakpoint-only(xs) {
+    padding: 0.4rem 0.6rem;
+    padding-right: 0.1rem;
+  }
+}
+
+.card-like-btn {
+  padding: 0.2rem 0.6rem;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  font-size: 1.5rem;
+  color: $like-bw;
+}
+
+.card-like-btn:hover {
+  color: $like-color;
+}
+
+.card-liked {
+  color: $like-color;
+}
+
+.card-text {
+  float: left;
+  padding-bottom: 0px;
+  margin: 0px;
+  line-height: 1.23rem;
+}
+
+.card-header {
+  padding: 3px 8px;
+  font-size: $card-text-size;
+  box-shadow: none;
+  background-color: white;
+  border-bottom: none;
+  font-weight: bold;
+}
+
+.header-buttons {
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
+
+.display-inline {
+  display: inline;
+}
+
+.card-username {
+  font-weight: bold;
+  padding-right: 0.4rem;
+}
+
+.card-columns {
+  column-gap: 0.75rem;
+
+  @include media-breakpoint-only(xl) {
+    column-count: 5;
+  }
+
+  @include media-breakpoint-only(lg) {
+    column-count: 4;
+  }
+
+  @include media-breakpoint-only(md) {
+    column-count: 3;
+  }
+
+  @include media-breakpoint-only(sm) {
+    column-count: 2;
+  }
+
+  @include media-breakpoint-only(xs) {
+    column-count: 1;
+  }
+}
+
+.container {
+  width: auto;
+  max-width: 1400px;
+  padding: 1rem 1rem;
+
+  @include media-breakpoint-only(xs) {
+    padding: 1rem;
+  }
+
+  @include media-breakpoint-only(xl) {
+    padding: 1rem 2rem;
+  }
+}
+
+#logo-icon {
+  color: white;
+  background-color: black;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include media-breakpoint-only(lg) {
+    display: none;
+  }
+
+  @include media-breakpoint-only(xl) {
+    display: none;
+  }
+
+  @include media-breakpoint-only(md) {
+    display: none;
+  }
+
+  @include media-breakpoint-only(sm) {
+    display: none;
+  }
+}
+
+#logo-text {
+  @include media-breakpoint-only(xs) {
+    display: none;
+  }
+}
+
+.card-img,
+.card-img-top {
+  @include media-breakpoint-only(xs) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+.container-fluid {
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @include media-breakpoint-only(xl) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @include media-breakpoint-only(xs) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.modal-header .close {
+  margin: 0;
+  padding: 0.7rem 1rem;
+  right: 0px;
+  position: absolute;
+}
+
+.modal-header {
+  padding: 0;
+  border-bottom: 0;
+}
+
+.modal-title-patchwork {
+  padding-top: 2rem;
+  font-family: $seconary-font-family;
+  font-size: 1.6rem;
+  margin: auto;
+  font-weight: 500;
+}
+
+.modal-text-auth {
+  max-width: 20rem;
+  font-size: 0.9rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.oauth-btn-wrapper {
+  padding: 0.4rem 0;
+}
+
+.switch-auth-type {
+  padding-top: 1rem;
+}
+
+.oauth-icon {
+  width: 17px;
+  height: 17px;
+  margin-top: -2px;
+  margin-right: 10px;
+}
+
+.oauth-btn {
+  padding: 8px 12px;
+  width: 12.4rem;
+  text-align: left;
+}
+
+.green-bold {
+  color: $color-success;
+  font-weight: 600;
+}
+
+a.green-bold:hover,
+a.green-bold:active {
+  color: $background-success-hovered;
+}
+
+.modal {
+  padding-right: 0em;
+}
+
+.no-ads-wrapper {
+  margin-top: 3rem;
+  font-family: $terciary-font-family;
+}
+
+.small-break {
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+}
+
+.modal-auth-body {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-dialog {
+  @include media-breakpoint-only(xs) {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.modal-content:hover,
+.modal-content:active {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.modal-content {
+  @include media-breakpoint-only(xs) {
+    height: unset;
+  }
+}
+
+.popover-body {
+  padding: 0;
+  width: 23rem;
+}
+
+.popover {
+  max-width: 23.5rem;
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+
+  @include media-breakpoint-only(xs) {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+  }
+}
+
+.banner .upgrade-button {
+  @include media-breakpoint-only(xs) {
+    display: none;
+  }
+}
+
+.header-buttons:nth-last-child(2) {
+  @include media-breakpoint-only(xs) {
+    margin-right: 0;
+  }
+}
+
+.notifications-overlay-header {
+  border-bottom: $divider-border;
+  padding: 0.35rem 0.6rem;
+}
+
+.notifications-overlay-footer {
+  border-top: $divider-border;
+  padding: 0.4rem 0.6rem;
+  text-align: center;
+}
+
+.notifications-img {
+  font-size: 2rem;
+  margin-right: 0.5rem;
+}
+
+.notifications-text {
+  vertical-align: middle;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.notifications-item {
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  border-bottom: $divider-border;
+}
+
+.notifications-item:last-child {
+  border-bottom: none;
+}
+
+.modal-backdrop.show {
+  opacity: 0.3;
+}
+
+.auth-form-wrapper {
+  padding: 1rem 3rem;
+}
+
+input[type="text"] {
+  font-size: 0.9rem;
+}
+
+.form-group {
+  margin-bottom: 0.5rem;
+}
+
+.auth-form-container {
+  max-width: 23rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.failure-background {
+  background-color: $like-color;
+}

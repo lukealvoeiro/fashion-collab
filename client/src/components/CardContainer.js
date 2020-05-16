@@ -6,7 +6,8 @@ class CardContainer extends Component {
   render() {
     return (
       <div className="card-columns">
-        <Card></Card>
+        {/* <Card></Card> */}
+        Hello
       </div>
     );
   }

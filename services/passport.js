@@ -52,7 +52,6 @@ passport.use(
       profileFields: ["id", "emails", "name"],
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
       const existingUser = await User.findOne({ facebookId: profile.id });
       if (existingUser) {
         return done(null, existingUser);

@@ -7,3 +7,7 @@ export const FETCH_SURVEYS = "fetch_surveys";
 export const ALTER_AUTH_MODAL = "alter_auth_modal";
 export const AUTH_LOGIN_FAIL = "auth_login_fail";
 export const AUTH_SIGNUP_FAIL = "auth_signup_fail";
+export const FETCH_POSTS = "fetch_posts";
+export const FAIL_FETCH_POSTS = "fetch_posts";
+export const NEW_POST = "new_post";
+export const LIKE_POST = "like_post";

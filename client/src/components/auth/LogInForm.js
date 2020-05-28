@@ -86,8 +86,6 @@ function validate(values) {
   return errors;
 }
 
-function submit(values, props) {}
-
 LogInForm = connect(mapStateToProps, actions)(LogInForm);
 
 export default reduxForm({

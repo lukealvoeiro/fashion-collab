@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const keys = require("./config/keys");
 require("./models/User");
 require("./models/Survey");
+require("./models/Post");
+require("./models/Comment");
 require("./services/passport");
 
 mongoose.connect(keys.mongoURI, {
@@ -13,6 +15,7 @@ mongoose.connect(keys.mongoURI, {
   useUnifiedTopology: true,
 });
 mongoose.set("useCreateIndex", true);
+mongoose.set("useFindAndModify", false);
 
 const app = express();
 
@@ -31,6 +34,8 @@ app.use(passport.session());
 require("./routes/authRoutes")(app);
 require("./routes/billingRoutes")(app);
 require("./routes/surveyRoutes")(app);
+require("./routes/fileRoutes")(app);
+require("./routes/postRoutes")(app);
 
 //code below will only run in production
 if (process.env.NODE_ENV === "production") {

@@ -17,10 +17,5 @@ export const fetchSurveys = () => async (dispatch) => {
   dispatch({ type: FETCH_SURVEYS, payload: res.data });
 };
 
-export {
-  fetchUser,
-  logoutUser,
-  signUpUser,
-  signInUser,
-  alterAuthModal,
-} from "./auth";
+export * from "./auth";
+export * from "./posts";

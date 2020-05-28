@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const mongooseAlgolia = require("mongoose-algolia");
 const { Schema } = mongoose;
+
+const keys = require("../config/keys");
+
 SALT_WORK_FACTOR = 10;
 
 var UserSchema = new Schema({
@@ -10,6 +14,7 @@ var UserSchema = new Schema({
   lastName: { type: String, required: true },
   email: { type: String, unique: true, required: true },
   password: { type: String },
+  posts: [{ type: Schema.Types.ObjectId, ref: "posts" }],
 });
 
 UserSchema.pre("save", function (next) {
@@ -38,4 +43,22 @@ UserSchema.methods.comparePassword = function (candidatePassword, callback) {
   });
 };
 
-module.exports = mongoose.model("users", UserSchema);
+UserSchema.plugin(mongooseAlgolia, {
+  appId: keys.algoliaAppID,
+  apiKey: keys.algoliaAPIKey,
+  indexName: keys.algoliaIndexName,
+  selector: "-password -firstName -lastName -posts",
+  virtuals: {
+    name: function (doc) {
+      return `${doc.firstName} ${doc.lastName}`;
+    },
+    type: function (doc) {
+      return "user";
+    },
+  },
+  debug: true,
+});
+let UserModel = mongoose.model("users", UserSchema);
+UserModel.SyncToAlgolia();
+
+module.exports = UserModel;

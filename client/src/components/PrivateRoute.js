@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 const PrivateRoute = ({ component: Component, auth, ...rest }) => (
   <Route
     {...rest}
-    render={props => {
+    render={(props) => {
       if (auth.isLoading === true) {
         return;
       } else {
@@ -21,9 +21,8 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
 );
 
 function mapStateToProps(state) {
-  console.log("Is Authenticated:", state.auth.isAuthenticated);
   return {
-    auth: state.auth
+    auth: state.auth,
   };
 }
 

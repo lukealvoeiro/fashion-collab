@@ -4,10 +4,11 @@ import { withRouter } from "react-router-dom";
 import * as actions from "../actions";
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import NotificationItem from "./NotificationItem";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import { authModalTypes } from "../utils/enums";
 import AuthModal from "./auth/AuthModal";
+import SearchBar from "./searchBar/SearchBar";
 
 class Header2 extends Component {
   renderModal() {
@@ -50,12 +51,18 @@ class Header2 extends Component {
     } else {
       return (
         <Fragment>
-          <a className="header-links align-middle link-unstyled" href="#">
-            Home
-          </a>
-          <a className="link-unstyled header-links align-middle" href="#">
+          <div
+            className="header-links align-middle"
+            style={{
+              display: "inline-block",
+              width: "20rem",
+            }}
+          >
+            <SearchBar />
+          </div>
+          <Link to="/" className="header-links align-middle link-unstyled">
             Explore
-          </a>
+          </Link>
           <a
             className="link-unstyled header-links align-middle header-buttons"
             href="#"

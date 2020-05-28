@@ -1,10 +1,85 @@
-const { Path } = require("path-parser");
-const { URL } = require("url");
 const mongoose = require("mongoose");
-const requireLogin = require("../middlewares/requireLogin");
-
-const Survey = mongoose.model("surveys"); // not requiring in the file directly because this will cause mongoose to error when testing
+const Post = mongoose.model("posts");
+const User = mongoose.model("users");
+const Comment = mongoose.model("comments");
 
 module.exports = (app) => {
-  app.post("/api/form/new", (req, res) => {});
+  app.get("/api/user/posts", async (req, res) => {
+    try {
+      const foundUser = await User.findOne({ _id: req.query.userId }).populate({
+        path: "posts",
+        populate: { path: "_user" },
+      });
+      const posts = Array.from(foundUser.posts).map(function (post) {
+        let currPost = post.toObject();
+        let index = currPost.likedBy.findIndex((element) => {
+          return element.equals(req.user._id);
+        });
+        currPost.isLiked = index >= 0;
+        return currPost;
+      });
+      res.send({ results: posts });
+    } catch (err) {
+      res.send(err);
+    }
+  });
+
+  app.get("/api/posts/all", async (req, res) => {
+    const results = await Post.find({}).populate("_user");
+    const posts = Array.from(results).map(function (post) {
+      let currPost = post.toObject();
+      let index = currPost.likedBy.findIndex((element) => {
+        return element.equals(req.user._id);
+      });
+      currPost.isLiked = index >= 0;
+      return currPost;
+    });
+    res.send({ results: posts });
+  });
+
+  app.post("/api/posts/", async (req, res) => {
+    const { description, filename } = req.body;
+    const newPost = await new Post({
+      _user: req.user.id,
+      description: description || null,
+      image: filename,
+    }).save();
+    let createdBy = await User.findOne({ _id: req.user.id });
+    createdBy.posts.push(newPost.id);
+    await createdBy.save();
+    res.send(newPost);
+  });
+
+  app.post("/api/posts/like/", async (req, res) => {
+    try {
+      let { userId, postId } = req.body;
+      let post = await Post.findOne({ _id: postId }).populate("_user");
+      let index = post.likedBy.indexOf(userId);
+      if (index < 0) {
+        post.likedBy.push(userId);
+      } else {
+        post.likedBy.splice(index, 1);
+      }
+      let modifiedPost = await post.save();
+      res.send(modifiedPost);
+    } catch (err) {
+      res.send(err);
+    }
+  });
+
+  app.post("/api/posts/comment/", async (req, res) => {
+    try {
+      let { postId, message } = req.body;
+      let post = await Post.findOne({ _id: postId });
+      if (post) {
+        let newComment = await new Comment({
+          _user: req.user.id,
+          forPost: postId,
+          text: message,
+        });
+      }
+    } catch (err) {
+      res.send(err);
+    }
+  });
 };

@@ -37,8 +37,12 @@ module.exports = (app) => {
   );
 
   app.get("/api/user", async (req, res) => {
-    const user = await User.findOne({ email: req.query.email });
-    res.send(user);
+    try {
+      const user = await User.findOne({ email: req.query.email });
+      res.send(user);
+    } catch (err) {
+      res.send(err);
+    }
   });
 
   app.post("/auth/register", async (req, res) => {

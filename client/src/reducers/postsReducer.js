@@ -6,20 +6,29 @@ import {
 } from "../actions/types";
 import _ from "lodash";
 
+const initialState = {
+  list: [],
+  correspondingTo: null,
+};
+
 export default function (state = [], action) {
   switch (action.type) {
     case FETCH_POSTS:
-      return action.payload;
+      return {
+        ...state,
+        list: action.payload.posts,
+        correspondingTo: action.payload.user,
+      };
     case NEW_POST:
-      state.push({ ...action.payload, isLiked: false });
-      return _.cloneDeep(state);
+      state.list.push({ ...action.payload, isLiked: false });
+      return { ...state };
     case LIKE_POST:
-      let foundIndex = state.findIndex(
+      let foundIndex = state.list.findIndex(
         (post) => post._id == action.payload._id
       );
-      let currLikeState = state[foundIndex].isLiked;
-      state[foundIndex] = { ...action.payload, isLiked: !currLikeState };
-      return _.cloneDeep(state);
+      let currLikeState = state.list[foundIndex].isLiked;
+      state.list[foundIndex] = { ...action.payload, isLiked: !currLikeState };
+      return { ...state };
     case FAIL_FETCH_POSTS:
     default:
       return state;

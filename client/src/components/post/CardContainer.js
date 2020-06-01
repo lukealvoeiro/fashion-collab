@@ -33,7 +33,7 @@ class CardContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  return { posts: state.posts };
+  return { posts: state.posts.list };
 }
 
 export default connect(mapStateToProps, null)(CardContainer);

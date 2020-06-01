@@ -14,7 +14,10 @@ var UserSchema = new Schema({
   lastName: { type: String, required: true },
   email: { type: String, unique: true, required: true },
   password: { type: String },
+  numPosts: { type: Number },
   posts: [{ type: Schema.Types.ObjectId, ref: "posts" }],
+  followers: [{ type: Schema.Types.ObjectId, ref: "users" }],
+  following: [{ type: Schema.Types.ObjectId, ref: "users" }],
 });
 
 UserSchema.pre("save", function (next) {

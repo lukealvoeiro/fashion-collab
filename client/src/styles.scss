@@ -15,12 +15,9 @@ $divider-border: 1px solid rgba(0, 0, 0, 0.2);
 $lr-spacing-notifications: 1rem;
 
 // font styles
-$primary-font-family: "Lato",
-sans-serif;
-$secondary-font-family: "Tomorrow",
-sans-serif;
-$terciary-font-family: "Playfair Display",
-sans-serif;
+$primary-font-family: "Lato", sans-serif;
+$secondary-font-family: "Tomorrow", sans-serif;
+$terciary-font-family: "Playfair Display", sans-serif;
 $card-text-size: 0.9rem;
 
 :root {
@@ -514,7 +511,8 @@ input[type="text"] {
   outline: none;
 }
 
-.react-autosuggest__input--open {}
+.react-autosuggest__input--open {
+}
 
 .react-autosuggest__suggestions-container {
   display: none;
@@ -647,4 +645,97 @@ input[type="text"] {
   position: absolute;
   bottom: 0;
   margin: 0 auto;
+}
+
+.profile-header {
+  margin-top: 0.5rem;
+  border-bottom: 1px solid rgba(var(--b38, 219, 219, 219), 1);
+  margin-bottom: 1rem;
+
+  @include media-breakpoint-only(xs) {
+    margin-bottom: 0;
+  }
+}
+
+.profile-spacing {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2rem;
+  max-width: 65rem;
+
+  @include media-breakpoint-only(xs) {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.profile-img-wrapper {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 125px;
+  width: 125px;
+  border-radius: 50%;
+  background-color: red;
+
+  @include media-breakpoint-only(md) {
+    height: 100px;
+    width: 100px;
+  }
+
+  @include media-breakpoint-only(sm) {
+    height: 75px;
+    width: 75px;
+  }
+
+  @include media-breakpoint-only(xs) {
+    height: 50px;
+    width: 50px;
+  }
+}
+
+.profile-row-spacer {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+
+  @include media-breakpoint-only(xs) {
+    justify-content: space-between;
+    text-align: center;
+  }
+}
+
+.user-info {
+  margin-right: 4rem;
+
+  @include media-breakpoint-only(xs) {
+    flex-basis: 0;
+    margin-right: 0;
+    flex: 1 1 0px;
+    border-top: 1px solid rgba(var(--b38, 219, 219, 219), 1);
+    padding-top: 1rem;
+  }
+}
+
+.user-info-number {
+  font-weight: 900;
+  content: "\A";
+  white-space: pre;
+}
+
+.profile-text-wrapper {
+  flex-grow: 2;
+  flex-direction: column;
+  flex-basis: 0;
+  @include media-breakpoint-only(xs) {
+    flex-grow: 3;
+  }
+}
+
+.follow-btn {
+  margin-left: 2rem;
+
+  @include media-breakpoint-only(xs) {
+    margin-right: 2rem;
+    margin-left: 1rem;
+  }
 }

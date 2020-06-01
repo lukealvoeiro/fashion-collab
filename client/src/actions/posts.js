@@ -40,9 +40,9 @@ export const fetchUserPosts = (userId) => async (dispatch) => {
       userId: userId,
     },
   });
-  if (res.data.results)
-    dispatch({ type: FETCH_POSTS, payload: res.data.results });
-  else dispatch({ type: FAIL_FETCH_POSTS, payload: res.data });
+  if (res.data.posts) {
+    dispatch({ type: FETCH_POSTS, payload: res.data });
+  } else dispatch({ type: FAIL_FETCH_POSTS, payload: res.data });
 };
 
 export const fetchAllPosts = () => async (dispatch) => {

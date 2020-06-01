@@ -6,10 +6,13 @@ const Comment = mongoose.model("comments");
 module.exports = (app) => {
   app.get("/api/user/posts", async (req, res) => {
     try {
-      const foundUser = await User.findOne({ _id: req.query.userId }).populate({
+      const populateParam = {
         path: "posts",
         populate: { path: "_user" },
-      });
+      };
+      const foundUser = await User.findOne({
+        _id: req.query.userId,
+      }).populate(populateParam);
       const posts = Array.from(foundUser.posts).map(function (post) {
         let currPost = post.toObject();
         let index = currPost.likedBy.findIndex((element) => {
@@ -18,7 +21,9 @@ module.exports = (app) => {
         currPost.isLiked = index >= 0;
         return currPost;
       });
-      res.send({ results: posts });
+      let user = foundUser.toObject();
+      delete user.posts;
+      res.send({ posts: posts, user: user });
     } catch (err) {
       res.send(err);
     }
@@ -34,7 +39,7 @@ module.exports = (app) => {
       currPost.isLiked = index >= 0;
       return currPost;
     });
-    res.send({ results: posts });
+    res.send({ posts: posts });
   });
 
   app.post("/api/posts/", async (req, res) => {
@@ -52,11 +57,12 @@ module.exports = (app) => {
 
   app.post("/api/posts/like/", async (req, res) => {
     try {
-      let { userId, postId } = req.body;
+      let { postId } = req.body;
+      console.log(req.user._id);
       let post = await Post.findOne({ _id: postId }).populate("_user");
-      let index = post.likedBy.indexOf(userId);
+      let index = post.likedBy.indexOf(req.user._id);
       if (index < 0) {
-        post.likedBy.push(userId);
+        post.likedBy.push(req.user._id);
       } else {
         post.likedBy.splice(index, 1);
       }

@@ -10,10 +10,10 @@ module.exports = {
   stripeSecretKey: process.env.STRIPE_SECRET_KEY,
   sendGridKey: process.env.SEND_GRID_KEY,
   redirectDomain: process.env.REDIRECT_DOMAIN,
-  awsAccessKeyID: process.env.AWS_ACCESS_KEY_ID
+  awsAccessKeyID: process.env.AWS_ACCESS_KEY_ID,
   awsSecretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   s3BucketName: process.env.S3_BUCKET_NAME,
   algoliaAppID: process.env.ALGOLIA_APP_ID,
   algoliaAPIKey: process.env.ALGOLIA_API_KEY,
-  algoliaIndexName: process.env.ALGOLIA_INDEX_NAME
+  algoliaIndexName: process.env.ALGOLIA_INDEX_NAME,
 };

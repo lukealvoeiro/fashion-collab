@@ -3,15 +3,15 @@ import {
   NEW_POST,
   LIKE_POST,
   FAIL_FETCH_POSTS,
+  CHANGE_POSTS_USER,
 } from "../actions/types";
-import _ from "lodash";
 
 const initialState = {
   list: [],
   correspondingTo: null,
 };
 
-export default function (state = [], action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_POSTS:
       return {
@@ -26,9 +26,13 @@ export default function (state = [], action) {
       let foundIndex = state.list.findIndex(
         (post) => post._id == action.payload._id
       );
-      let currLikeState = state.list[foundIndex].isLiked;
-      state.list[foundIndex] = { ...action.payload, isLiked: !currLikeState };
+      if (foundIndex >= 0) {
+        let currLikeState = state.list[foundIndex].isLiked;
+        state.list[foundIndex] = { ...action.payload, isLiked: !currLikeState };
+      }
       return { ...state };
+    case CHANGE_POSTS_USER:
+      return { ...state, correspondingTo: action.payload };
     case FAIL_FETCH_POSTS:
     default:
       return state;

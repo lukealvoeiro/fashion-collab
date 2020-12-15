@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Redirect, withRouter } from "react-router-dom";
-import { Spinner } from "react-bootstrap";
 import { connect } from "react-redux";
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => (

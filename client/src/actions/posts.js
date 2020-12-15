@@ -40,6 +40,7 @@ export const fetchUserPosts = (userId) => async (dispatch) => {
       userId: userId,
     },
   });
+  console.log(res);
   if (res.data.posts) {
     dispatch({ type: FETCH_POSTS, payload: res.data });
   } else dispatch({ type: FAIL_FETCH_POSTS, payload: res.data });
@@ -53,6 +54,7 @@ export const fetchAllPosts = () => async (dispatch) => {
 };
 
 export const likePost = (reqObj) => async (dispatch) => {
+  console.log(reqObj);
   const res = await axios.post("api/posts/like", reqObj);
   dispatch({ type: LIKE_POST, payload: res.data });
 };

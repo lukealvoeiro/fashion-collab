@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { reduxForm, Field, SubmissionError } from "redux-form";
+import { reduxForm, Field } from "redux-form";
 import { Button, Alert } from "react-bootstrap";
 
 import { EMAIL_RE } from "../../utils/regularExpressions";
@@ -54,7 +54,11 @@ class LogInForm extends Component {
             >
               Cancel
             </Button>
-            <Button type="submit" variant="success" disabled={submitting}>
+            <Button
+              type="submit"
+              variant="success"
+              disabled={submitting || pristine}
+            >
               Log In
             </Button>
           </div>

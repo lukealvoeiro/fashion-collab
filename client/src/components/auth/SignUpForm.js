@@ -1,11 +1,10 @@
 import _ from "lodash";
 import axios from "axios";
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import { Button, Alert } from "react-bootstrap";
 
-import SurveyField from "../surveys/SurveyField";
 import AuthFormField from "./AuthFormField";
 import { EMAIL_RE } from "../../utils/regularExpressions";
 import * as actions from "../../actions/index";
@@ -39,32 +38,6 @@ export class SignUpForm extends Component {
     const { error, handleSubmit, pristine, submitting } = this.props;
     return (
       <div className="auth-form-container">
-        {/* <a href="/auth/google">Sign in with Google</a>
-        <button
-          onClick={() => {
-            this.props.signInUser({
-              email: "req.body.email",
-              password: "req.body.passport",
-            });
-          }}
-        >
-          SignIn test
-        </button>
-        <button
-          onClick={() => {
-            this.props.signUpUser(
-              {
-                first_name: "req.body.first_name",
-                last_name: "req.body.last_name",
-                email: "req.body.email",
-                password: "req.body.passport",
-              },
-              this.props.history
-            );
-          }}
-        >
-          Register test
-        </button> */}
         <form
           onSubmit={handleSubmit(() =>
             this.props.signUpUser(this.props.formValues)
@@ -84,7 +57,11 @@ export class SignUpForm extends Component {
             >
               Cancel
             </Button>
-            <Button type="submit" variant="success" disabled={submitting}>
+            <Button
+              type="submit"
+              variant="success"
+              disabled={submitting || pristine}
+            >
               Create user
             </Button>
           </div>
@@ -108,7 +85,7 @@ function validate(values) {
     errors.password2 = "The passwords entered do not match";
   }
   validateEmptyFields(values, errors);
-  return errors; //if errors is empty, redux form allows next step!
+  return errors;
 }
 
 async function asyncValidate(values) {

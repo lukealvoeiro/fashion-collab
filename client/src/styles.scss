@@ -15,9 +15,12 @@ $divider-border: 1px solid rgba(0, 0, 0, 0.2);
 $lr-spacing-notifications: 1rem;
 
 // font styles
-$primary-font-family: "Lato", sans-serif;
-$secondary-font-family: "Tomorrow", sans-serif;
-$terciary-font-family: "Playfair Display", sans-serif;
+$primary-font-family: "Lato",
+sans-serif;
+$secondary-font-family: "Tomorrow",
+sans-serif;
+$terciary-font-family: "Playfair Display",
+sans-serif;
 $card-text-size: 0.9rem;
 
 :root {
@@ -511,8 +514,7 @@ input[type="text"] {
   outline: none;
 }
 
-.react-autosuggest__input--open {
-}
+.react-autosuggest__input--open {}
 
 .react-autosuggest__suggestions-container {
   display: none;
@@ -726,6 +728,7 @@ input[type="text"] {
   flex-grow: 2;
   flex-direction: column;
   flex-basis: 0;
+
   @include media-breakpoint-only(xs) {
     flex-grow: 3;
   }
@@ -738,4 +741,10 @@ input[type="text"] {
     margin-right: 2rem;
     margin-left: 1rem;
   }
+}
+
+.no-posts {
+  text-align: center;
+  margin-top: 2rem;
+  font-style: italic;
 }

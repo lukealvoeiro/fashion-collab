@@ -58,7 +58,6 @@ class Autocomplete extends Component {
   };
 
   renderSuggestion(suggestion, obj) {
-    const { query, isHighlighted } = obj;
     return <CustomHighlight hit={suggestion} attribute="name" />;
   }
 

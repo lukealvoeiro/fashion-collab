@@ -58,8 +58,8 @@ module.exports = (app) => {
   app.post("/api/posts/like/", async (req, res) => {
     try {
       let { postId } = req.body;
-      console.log(req.user._id);
       let post = await Post.findOne({ _id: postId }).populate("_user");
+      console.log(post);
       let index = post.likedBy.indexOf(req.user._id);
       if (index < 0) {
         post.likedBy.push(req.user._id);

@@ -1,11 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
-import PostItem from "./PostItem";
+import _ from "lodash";
 import { connect } from "react-redux";
 
-//to load cards:
-import _ from "lodash";
-import SearchBar from "../searchBar/SearchBar";
+import PostItem from "./PostItem";
 
 class CardContainer extends Component {
   renderPosts() {
@@ -16,14 +14,19 @@ class CardContainer extends Component {
 
   state = {};
   render() {
+    const noPosts =
+      this.props.posts.length == 0 ? (
+        <div className="no-posts">No posts available</div>
+      ) : null;
     return (
       <Fragment>
-        <div class="card-columns">{this.renderPosts()}</div>
+        <div className="card-columns">{this.renderPosts()}</div>
+        {noPosts}
         <div className="new-post-button">
           <Link to="/posts/new">
-            <span class="fa-stack fa-2x br-buttons">
-              <i class="fas fa-circle fa-stack-2x fa-inverse"></i>
-              <i class="fas fa-plus fa-stack-1x"></i>
+            <span className="fa-stack fa-2x br-buttons">
+              <i className="fas fa-circle fa-stack-2x fa-inverse"></i>
+              <i className="fas fa-plus fa-stack-1x"></i>
             </span>
           </Link>
         </div>

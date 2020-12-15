@@ -36,6 +36,7 @@ require("./routes/billingRoutes")(app);
 require("./routes/surveyRoutes")(app);
 require("./routes/fileRoutes")(app);
 require("./routes/postRoutes")(app);
+require("./routes/userRoutes")(app);
 
 //code below will only run in production
 if (process.env.NODE_ENV === "production") {

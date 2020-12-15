@@ -14,10 +14,13 @@ var UserSchema = new Schema({
   lastName: { type: String, required: true },
   email: { type: String, unique: true, required: true },
   password: { type: String },
-  numPosts: { type: Number },
   posts: [{ type: Schema.Types.ObjectId, ref: "posts" }],
   followers: [{ type: Schema.Types.ObjectId, ref: "users" }],
   following: [{ type: Schema.Types.ObjectId, ref: "users" }],
+  profileImg: {
+    type: String,
+    default: "https://miro.medium.com/max/480/0*WK_vAxJo4O7Kdq3j.png",
+  },
 });
 
 UserSchema.pre("save", function (next) {

@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import * as actions from "../actions";
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import NotificationItem from "./NotificationItem";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { authModalTypes } from "../utils/enums";
 import AuthModal from "./auth/AuthModal";

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import algoliasearch from "algoliasearch/lite";
-import { InstantSearch, Configure, Index } from "react-instantsearch-dom";
+import { InstantSearch, Configure } from "react-instantsearch-dom";
 import Autocomplete from "./Autocomplete";
 
 const keys = require("../../config/keys");
@@ -18,8 +18,6 @@ class SearchBar extends Component {
       >
         <Configure hitsPerPage={7} />
         <Autocomplete />
-        {/* <Index indexName={keys.algoliaIndexName} /> */}
-        {/* can add more indices if you want */}
       </InstantSearch>
     );
   }

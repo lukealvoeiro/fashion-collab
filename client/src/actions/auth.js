@@ -3,7 +3,6 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGOUT_USER,
-  EMAIL_TAKEN,
   ALTER_AUTH_MODAL,
   AUTH_LOGIN_FAIL,
   AUTH_SIGNUP_FAIL,
@@ -18,13 +17,12 @@ export const fetchUser = () => async (dispatch) => {
       dispatch({ type: AUTH_ERROR });
     }
   } catch (error) {
-    // dispatch(returnErrors(error.response.data, error.response.statusz));
     dispatch({ type: AUTH_ERROR });
   }
 };
 
 export const logoutUser = () => async (dispatch) => {
-  const res = await axios.get("/api/logout");
+  await axios.get("/api/logout");
   dispatch({ type: LOGOUT_USER });
 };
 

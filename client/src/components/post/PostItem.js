@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import * as actions from "../../actions";
 import { getS3File } from "../../utils/files";
@@ -26,22 +27,24 @@ class PostItem extends Component {
       isLiked: !prevState.isLiked,
     }));
     this.props.likePost({
-      userId: this.props.currentUserID,
       postId: this.props.post._id,
     });
   }
 
   render() {
-    const { description, image, createdOn } = this.props.post;
-    const { firstName, lastName } = this.props.post._user;
+    const { description, image } = this.props.post;
+    const { firstName, lastName, _id } = this.props.post._user;
     return (
       <div className="card">
         <img className="card-img-top" src={getS3File(image)} alt="Card" />
         <div className="card-body card-padding">
           <div className="card-text">
-            <p className="display-inline card-username">
+            <Link
+              className="display-inline card-username link-unstyled"
+              to={"/u/" + _id}
+            >
               {firstName + " " + lastName}
-            </p>
+            </Link>
             <p>{description}</p>
           </div>
           <a

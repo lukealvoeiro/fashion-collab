@@ -8,6 +8,8 @@ require("./models/User");
 require("./models/Survey");
 require("./models/Post");
 require("./models/Comment");
+require("./models/Hashtag");
+require("./models/HashtagPostRelations");
 require("./services/passport");
 
 mongoose.connect(keys.mongoURI, {

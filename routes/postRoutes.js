@@ -1,7 +1,10 @@
+const { text } = require("body-parser");
 const mongoose = require("mongoose");
 const Post = mongoose.model("posts");
 const User = mongoose.model("users");
 const Comment = mongoose.model("comments");
+const Hashtag = mongoose.model("hashtags");
+const HashtagPostRelations = mongoose.model("hashtagPostRelations");
 
 module.exports = (app) => {
   app.get("/api/user/posts", async (req, res) => {
@@ -49,6 +52,30 @@ module.exports = (app) => {
       description: description || null,
       image: filename,
     }).save();
+    const regexp = new RegExp("#([^\\s]*)", "g");
+    const tags = description.match(regexp) || [];
+    const tagsInDB = await Hashtag.find({
+      text: {
+        $in: tags,
+      },
+    });
+    allTags = [];
+    for (const hashtag of tags) {
+      console.log("current hashtag: " + hashtag);
+      let found = false;
+      tagsInDB.forEach((foundTag) => {
+        if (foundTag.text == hashtag) {
+          found = foundTag;
+        }
+      });
+      if (found) {
+        allTags.push({ _hashtag: found._id, _post: newPost._id });
+      } else {
+        const newHashtag = await new Hashtag({ text: hashtag }).save();
+        allTags.push({ _hashtag: newHashtag._id, _post: newPost._id });
+      }
+    }
+    let newRelations = await HashtagPostRelations.create(allTags);
     let createdBy = await User.findOne({ _id: req.user.id });
     createdBy.posts.push(newPost.id);
     await createdBy.save();

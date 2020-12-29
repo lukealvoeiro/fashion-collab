@@ -5,12 +5,25 @@ import * as actions from "../actions";
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import NotificationItem from "./NotificationItem";
 import { Link } from "react-router-dom";
+import { createAlertNotifications } from "./../utils/notificationsParser";
 
 import { authModalTypes } from "../utils/enums";
 import AuthModal from "./auth/AuthModal";
 import SearchBar from "./searchBar/SearchBar";
 
 class Header2 extends Component {
+  componentDidMount() {
+    try {
+      this.props.fetchNotifications();
+
+      setInterval(() => {
+        this.props.fetchNotifications();
+      }, 15000);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   renderModal() {
     if (!this.props.auth.authModal) return;
     return <AuthModal />;
@@ -72,7 +85,28 @@ class Header2 extends Component {
           <OverlayTrigger
             trigger="click"
             placement="bottom"
-            overlay={popover}
+            overlay={
+              <Popover>
+                <Popover.Content>
+                  <div className="notifications-overlay-header">
+                    <strong>Notifications</strong>
+                  </div>
+                  <div
+                    style={{
+                      maxHeight: "400px",
+                      height: "100%",
+                      overflow: "hidden",
+                      overflowY: "scroll",
+                    }}
+                  >
+                    {createAlertNotifications(this.props.notifications.alerts)}
+                  </div>
+                  <div className="notifications-overlay-footer">
+                    <strong>See all</strong>
+                  </div>
+                </Popover.Content>
+              </Popover>
+            }
             rootClose
             onHide={() => this.redirectToHome()}
           >
@@ -116,29 +150,9 @@ class Header2 extends Component {
   }
 }
 
-const popover = (
-  <Popover>
-    <Popover.Content>
-      <div className="notifications-overlay-header">
-        <strong>Notifications</strong>
-      </div>
-      <div>
-        <NotificationItem />
-        <NotificationItem />
-        <NotificationItem />
-        <NotificationItem />
-        <NotificationItem />
-        <NotificationItem />
-      </div>
-      <div className="notifications-overlay-footer">
-        <strong>See all</strong>
-      </div>
-    </Popover.Content>
-  </Popover>
-);
-
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  notifications: state.notifications,
 });
 
 export default withRouter(connect(mapStateToProps, actions)(Header2));

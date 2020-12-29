@@ -6,8 +6,8 @@ const HashtagPostRelationsSchema = new Schema({
   _post: { type: Schema.Types.ObjectId, ref: "posts" },
 });
 
-let PostModel = mongoose.model(
+let HashtagPostRelationshipModel = mongoose.model(
   "hashtagPostRelations",
   HashtagPostRelationsSchema
 );
-module.exports = PostModel;
+module.exports = HashtagPostRelationshipModel;

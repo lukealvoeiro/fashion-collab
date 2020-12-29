@@ -19,3 +19,4 @@ export const fetchSurveys = () => async (dispatch) => {
 
 export * from "./auth";
 export * from "./posts";
+export * from "./notifications";

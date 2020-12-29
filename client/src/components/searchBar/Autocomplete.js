@@ -1,18 +1,24 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connectAutoComplete, connectHighlight } from "react-instantsearch-dom";
 import AutoSuggest from "react-autosuggest";
 import { withRouter } from "react-router-dom";
 
-const Highlight = ({ highlight, attribute, hit }) => {
+const Highlight = ({ highlight, attribute, hit, profileImg }) => {
   const parsedHit = highlight({
     highlightProperty: "_highlightResult",
     attribute,
     hit,
   });
-
+  const imgUrl = {
+    backgroundImage: `url("${hit.profileImg}")`,
+    height: 25,
+    width: 25,
+  };
+  const imgTag = <i className="fas circle-img" style={imgUrl}></i>;
   return (
-    <div>
-      <span>
+    <div className="center-background-img">
+      {imgTag}
+      <span style={{ paddingLeft: "0.3rem" }}>
         {parsedHit.map((part, index) =>
           part.isHighlighted ? (
             <span key={index}>{part.value}</span>

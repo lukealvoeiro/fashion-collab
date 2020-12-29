@@ -48,7 +48,6 @@ class PostItem extends Component {
             <p>{description}</p>
           </div>
           <a
-            href="#"
             className="card-like-btn align-middle link-unstyled"
             onClick={() => {
               this.likePost();

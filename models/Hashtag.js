@@ -5,7 +5,7 @@ const HashtagSchema = new Schema({
   text: String,
 });
 
-let PostModel = mongoose.model("hashtags", HashtagSchema);
+let HashtagModel = mongoose.model("hashtags", HashtagSchema);
 // PostModel.SyncToAlgolia();
 
-module.exports = PostModel;
+module.exports = HashtagModel;

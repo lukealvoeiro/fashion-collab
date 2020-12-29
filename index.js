@@ -10,6 +10,7 @@ require("./models/Post");
 require("./models/Comment");
 require("./models/Hashtag");
 require("./models/HashtagPostRelations");
+require("./models/Notifications");
 require("./services/passport");
 
 mongoose.connect(keys.mongoURI, {
@@ -39,6 +40,7 @@ require("./routes/surveyRoutes")(app);
 require("./routes/fileRoutes")(app);
 require("./routes/postRoutes")(app);
 require("./routes/userRoutes")(app);
+require("./routes/notificationRoutes")(app);
 
 //code below will only run in production
 if (process.env.NODE_ENV === "production") {

@@ -11,7 +11,6 @@ const UserHeader = ({
   unfollowUser,
   currUserId,
 }) => {
-  console.log(profile);
   const isMobile = useMediaQuery({ maxWidth: 576 });
   if (!profile) return null;
 
@@ -60,19 +59,21 @@ const UserHeader = ({
       </div>
     </div>
   );
+
+  const backgroundImg = profile
+    ? {
+        backgroundImage: `url("${profile.profileImg}")`,
+      }
+    : {};
+
   return (
     <header className="profile-header">
       <div className="profile-spacing">
         <div style={{ flexGrow: 1, flexBasis: 0 }}>
           <div
-            className="profile-img-wrapper"
-            style={{
-              backgroundImage:
-                "https://miro.medium.com/max/480/0*WK_vAxJo4O7Kdq3j.png",
-            }}
-          >
-            <img></img>
-          </div>
+            className="profile-img-wrapper circle-img"
+            style={backgroundImg}
+          ></div>
         </div>
         <section className="profile-text-wrapper">
           <div className="profile-row-spacer no-justify">

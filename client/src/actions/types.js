@@ -12,3 +12,4 @@ export const FAIL_FETCH_POSTS = "fetch_posts";
 export const NEW_POST = "new_post";
 export const LIKE_POST = "like_post";
 export const CHANGE_POSTS_USER = "change_posts_user";
+export const UPDATE_NOTIFICATIONS = "update_notifications";

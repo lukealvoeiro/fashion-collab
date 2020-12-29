@@ -5,6 +5,7 @@ const User = mongoose.model("users");
 const Comment = mongoose.model("comments");
 const Hashtag = mongoose.model("hashtags");
 const HashtagPostRelations = mongoose.model("hashtagPostRelations");
+const Notification = mongoose.model("notifications");
 
 module.exports = (app) => {
   app.get("/api/user/posts", async (req, res) => {
@@ -86,10 +87,27 @@ module.exports = (app) => {
     try {
       let { postId } = req.body;
       let post = await Post.findOne({ _id: postId }).populate("_user");
-      console.log(post);
       let index = post.likedBy.indexOf(req.user._id);
       if (index < 0) {
         post.likedBy.push(req.user._id);
+        if (post._user._id.toString() === req.user._id.toString()) {
+          // liked by the same user, thus create notification
+          console.log("liked by same user");
+          try {
+            const newNotification = await new Notification({
+              text: "",
+              activityType: "LIKE",
+              objectType: "POST",
+              objectUrl: "TODO",
+              _recipientId: post._user._id,
+              _senderId: mongoose.Types.ObjectId(req.user._id),
+            }).save();
+            console.log(newNotification);
+          } catch (error) {
+            console.log(error);
+            console.log("Error creating new notification");
+          }
+        }
       } else {
         post.likedBy.splice(index, 1);
       }

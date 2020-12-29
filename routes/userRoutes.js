@@ -2,6 +2,7 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 
 const User = mongoose.model("users");
+const Notification = mongoose.model("notifications");
 
 module.exports = (app) => {
   app.post("/api/user/follow/", async (req, res) => {
@@ -14,10 +15,19 @@ module.exports = (app) => {
         { new: true }
       );
       if (userFollowed) {
-        await User.findOneAndUpdate(
+        const followingUser = await User.findOneAndUpdate(
           { _id: currentUserId },
           { $addToSet: { following: userId } }
         );
+        const newNotification = await new Notification({
+          text: "",
+          activityType: "FOLLOW",
+          objectType: "",
+          objectUrl: "TODO",
+          _recipientId: userFollowed._id,
+          _senderId: mongoose.Types.ObjectId(followingUser._id),
+        }).save();
+        console.log(newNotification);
       }
       res.send(userFollowed);
     } catch (err) {

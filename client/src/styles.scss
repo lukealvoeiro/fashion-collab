@@ -437,6 +437,8 @@ a.green-bold:active {
 .notifications-img {
   font-size: 2rem;
   margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .notifications-text {
@@ -448,7 +450,7 @@ a.green-bold:active {
 .notifications-item {
   display: flex;
   align-items: center;
-  padding: 0 0.5rem;
+  padding: 0.3rem 0.5rem;
   border-bottom: $divider-border;
 }
 
@@ -544,23 +546,17 @@ input[type="text"] {
 
 .react-autosuggest__suggestion {
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
+  padding-right: 1rem;
 }
 
 .react-autosuggest__suggestion--highlighted {
   background-color: #ecf0f7;
+  border-radius: 4px;
 }
 
-.teee {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 1.5rem;
-  margin: 0 auto;
-  font-size: 1.5rem;
+.center-background-img {
   display: flex;
-  justify-content: center;
-  color: $text-color-primary;
 }
 
 .new-post-button {
@@ -677,7 +673,6 @@ input[type="text"] {
   height: 125px;
   width: 125px;
   border-radius: 50%;
-  background-color: red;
 
   @include media-breakpoint-only(md) {
     height: 100px;
@@ -747,4 +742,11 @@ input[type="text"] {
   text-align: center;
   margin-top: 2rem;
   font-style: italic;
+}
+
+.circle-img {
+  background-position: center ;
+  background-repeat: no-repeat ;
+  background-size: cover;
+  border-radius: 100px;
 }

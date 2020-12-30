@@ -16,6 +16,7 @@ export const newPost = (values, history) => async (dispatch) => {
       filetype: file.type,
     },
   });
+  console.log(signedUrlResult);
   try {
     let signedUrl = signedUrlResult.data;
     let result = await axios.put(signedUrl, file, {

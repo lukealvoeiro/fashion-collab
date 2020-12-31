@@ -1,7 +1,7 @@
 // prod.js - production keys here
 module.exports = {
-  algoliaAppID: process.env.ALGOLIA_APP_ID,
-  algoliaAPIKey: process.env.ALGOLIA_API_KEY,
-  algoliaIndexName: process.env.ALGOLIA_INDEX_NAME,
+  algoliaAppID: process.env.REACT_APP_ALGOLIA_APP_ID,
+  algoliaAPIKey: process.env.REACT_APP_ALGOLIA_API_KEY,
+  algoliaIndexName: process.env.REACT_APP_ALGOLIA_INDEX_NAME,
   s3BucketAddress: process.env.REACT_APP_S3_BUCKET_ADDRESS,
 };

@@ -34,9 +34,11 @@ class PostItem extends Component {
   render() {
     const { description, image } = this.props.post;
     const { firstName, lastName, _id } = this.props.post._user;
+    const imageSrc = getS3File(image);
+    console.log(imageSrc);
     return (
       <div className="card">
-        <img className="card-img-top" src={getS3File(image)} alt="Card" />
+        <img className="card-img-top" src={imageSrc} alt="Card" />
         <div className="card-body card-padding">
           <div className="card-text">
             <Link

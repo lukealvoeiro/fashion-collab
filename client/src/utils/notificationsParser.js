@@ -20,7 +20,6 @@ export function createAlertNotifications(notificationsArr) {
       );
     }
   }
-  res = [];
   if (res.length < 1) {
     console.log("this is happening");
     return (
@@ -30,6 +29,16 @@ export function createAlertNotifications(notificationsArr) {
     );
   }
   return res;
+}
+
+export function getNotificationCount(notifications) {
+  let counter = 0;
+  console.log(notifications);
+  for (let i = 0; i < notifications.length; i++) {
+    if (notifications[i].isUnread) counter++;
+  }
+  if (counter > 50) return "50+";
+  return counter;
 }
 
 export function createMessagesNotifications(notificationsArr) {}

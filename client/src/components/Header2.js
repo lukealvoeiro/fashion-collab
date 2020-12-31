@@ -5,7 +5,10 @@ import * as actions from "../actions";
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import NotificationItem from "./NotificationItem";
 import { Link } from "react-router-dom";
-import { createAlertNotifications } from "./../utils/notificationsParser";
+import {
+  createAlertNotifications,
+  getNotificationCount,
+} from "./../utils/notificationsParser";
 
 import { authModalTypes } from "../utils/enums";
 import AuthModal from "./auth/AuthModal";
@@ -76,12 +79,9 @@ class Header2 extends Component {
           <Link to="/" className="header-links align-middle link-unstyled">
             Explore
           </Link>
-          <a
-            className="link-unstyled header-links align-middle header-buttons"
-            href="#"
-          >
+          <span className="link-unstyled header-links align-middle header-buttons">
             <i className="far fa-comment-dots"></i>
-          </a>
+          </span>
           <OverlayTrigger
             trigger="click"
             placement="bottom"
@@ -110,12 +110,12 @@ class Header2 extends Component {
             rootClose
             onHide={() => this.redirectToHome()}
           >
-            <a
-              className="link-unstyled header-links align-middle header-buttons"
-              href="#"
-            >
+            <span className="link-unstyled header-links align-middle header-buttons">
               <i className="far fa-bell"></i>
-            </a>
+              <span className="notifications-num">
+                {getNotificationCount(this.props.notifications.alerts)}
+              </span>
+            </span>
           </OverlayTrigger>
 
           <a

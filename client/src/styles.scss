@@ -750,3 +750,14 @@ input[type="text"] {
   background-size: cover;
   border-radius: 100px;
 }
+
+.notifications-num {
+    position: relative;
+    right: 0.5rem;
+    top: -8px;
+    background-color: rgba(212, 19, 13, 1);
+    color: #fff;
+    border-radius: 4px;
+    padding: 1px 3px;
+    font-size: 0.7rem
+}

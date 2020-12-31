@@ -14,7 +14,6 @@ export function generateUUID() {
 }
 
 export function getS3File(filename) {
-  console.log(process.env.NODE_ENV);
   return keys.s3BucketAddress + filename;
 }
 

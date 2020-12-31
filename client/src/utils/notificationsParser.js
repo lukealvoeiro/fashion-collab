@@ -20,6 +20,15 @@ export function createAlertNotifications(notificationsArr) {
       );
     }
   }
+  res = [];
+  if (res.length < 1) {
+    console.log("this is happening");
+    return (
+      <div className="notifications-item" style={{ justifyContent: "center" }}>
+        No new notifications!
+      </div>
+    );
+  }
   return res;
 }
 
